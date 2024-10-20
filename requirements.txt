@@ -1,0 +1,3 @@
+Quart>=0.19.6
+aiofiles>=24.1.0
+aiohttp>=3.10.8
