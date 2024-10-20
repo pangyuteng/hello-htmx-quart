@@ -8,9 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
   </head>
   <body>
-    <span class="badge text-bg-warning">hola</span>
+    <span class="badge text-bg-warning">
+      <div id="api-response"></div>
+    </span>
+    <div hx-trigger="load" hx-get="/api" hx-target="#api-response">
+
+    <div hx-ext="ws" ws-connect="/ws">
+        <div id="notifications"></div>
+        <div id="chat_room">
+            ...
+        </div>
+        <form id="form" ws-send>
+            <input name="chat_message">
+        </form>
+    </div>
+
   </body>
 </html>

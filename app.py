@@ -25,7 +25,6 @@ async def ping():
 async def hello():
     return await render_template("index.html")
 
-
 @app.route("/api")
 async def json():
     return {"hello": "world"}
@@ -35,7 +34,6 @@ async def ws():
     while True:
         await websocket.send("hello")
         await websocket.send_json({"hello": "world"})
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
