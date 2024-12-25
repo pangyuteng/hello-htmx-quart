@@ -1,15 +1,11 @@
-import traceback
-import os
-import sys
-import ast
-import pathlib
 import argparse
-import datetime
-import aiohttp
 import asyncio
-
-from quart import Quart, render_template, websocket, jsonify
-
+import json
+from quart import (
+    Quart,
+    render_template,
+    stream_with_context,
+)
 
 app = Quart(__name__,
     static_url_path='', 
@@ -17,23 +13,20 @@ app = Quart(__name__,
     template_folder='templates',
 )
 
-@app.route('/ping', methods=['GET'])
-async def ping():
-    return jsonify("pong")
+
+@app.route('/stream')
+async def stream_json():
+    async def generate_data():
+        for i in range(10):
+            data = {'id': i, 'value': 'Hello from Quart!'}
+            yield json.dumps(data) + '\n'
+            await asyncio.sleep(1)  # Simulate some delay
+
+    return generate_data(), 200, {'Content-Type': 'application/x-ndjson'}
 
 @app.route("/")
-async def hello():
+async def home():
     return await render_template("index.html")
-
-@app.route("/api")
-async def json():
-    return {"hello": "world"}
-
-@app.websocket("/ws")
-async def ws():
-    while True:
-        await websocket.send("hello")
-        await websocket.send_json({"hello": "world"})
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
