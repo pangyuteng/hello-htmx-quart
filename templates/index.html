@@ -9,52 +9,47 @@
 
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
-    
+
     <style>
     </style>
-
-    <script>
-
-    d3.csv('/data-csv', function(csvdata){
-        function unpack(csvdata, key) {
-            return csvdata.map(function(row) { return row[key]; });
-        }
-        var columnList = Object.keys(csvdata[0]);
-        console.log(columnList)
-        var z_data=[ ]
-        for(i=0;i<columnList.length;i++)
-        {
-            z_data.push(unpack(csvdata,columnList[i]));
-        }
-
-        var data = [{
-                z: z_data,
-                type: 'surface'
-                }];
-
-        var layout = {
-        title: {
-            text: 'test-surface'
-        },
-        autosize: false,
-        width: 512,
-        height: 512,
-        margin: {
-            l: 50,
-            r: 50,
-            b: 50,
-            t: 50,
-        },
-        };
-        Plotly.newPlot('mydiv', data, layout);
-    });
-    </script>
 </head>
 
 <body>
-<div hx-ext="ws" ws-connect="/ws-basic">
-<div id="notifications"></div>
 
+    <div id="mydiv"></div>
+
+<div hx-ext="ws" ws-connect="/ws-data">
+111
+<div id="notifications"></div>
+hoho
 </div>
+
+
+<script>
+
+    var z_data=[ ]
+    var data = [{
+            z: z_data,
+            type: 'surface'
+            }];
+
+    var layout = {
+    title: {
+        text: 'test-surface'
+    },
+    autosize: false,
+    width: 512,
+    height: 512,
+    margin: {
+        l: 50,
+        r: 50,
+        b: 50,
+        t: 50,
+    },
+    };
+    Plotly.newPlot('mydiv', data, layout);
+
+</script>
+
 </body>
 </html>
