@@ -1,0 +1,26 @@
+
+<html lang="en" data-bs-theme="dark">
+<head>
+<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+
+<style>
+</style>
+<script>
+</script>
+</head>
+
+<body>
+
+hola
+<div hx-ext="ws" ws-connect="/stream">
+  <div id="notifications"></div>
+  <div id="chat_room">
+  </div>
+  <form id="form" ws-send>
+      <input name="chat_message">
+  </form>
+</div>
+</body>
+
+</html>

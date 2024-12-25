@@ -3,8 +3,8 @@ import asyncio
 import json
 from quart import (
     Quart,
+    websocket,
     render_template,
-    stream_with_context,
 )
 
 app = Quart(__name__,
@@ -13,20 +13,24 @@ app = Quart(__name__,
     template_folder='templates',
 )
 
-
-@app.route('/stream')
-async def stream_json():
-    async def generate_data():
-        for i in range(10):
-            data = {'id': i, 'value': 'Hello from Quart!'}
-            yield json.dumps(data) + '\n'
-            await asyncio.sleep(1)  # Simulate some delay
-
-    return generate_data(), 200, {'Content-Type': 'application/x-ndjson'}
+@app.websocket('/ws')
+async def ws():
+    try:
+        while True:
+            #data = await websocket.receive()
+            for i in range(3):
+                data = {'id': i, 'value': 'Hello from Quart!'}
+                yield json.dumps(data) + '\n'
+                await websocket.send(data)
+                await asyncio.sleep(1)  # Simulate some delay
+    except asyncio.CancelledError:
+        print('Client disconnected')
+        raise
+    # no return, means connection is kept open.
 
 @app.route("/")
 async def home():
-    return await render_template("index.html")
+    return await render_template("js-test.html")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

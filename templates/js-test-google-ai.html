@@ -28,3 +28,16 @@ fetch('/stream')
     read();
   });
 </script>
+
+<!--
+# pure shit from google ai
+@app.route('/stream')
+async def stream_json():
+    async def generate_data():
+        for i in range(10):
+            data = {'id': i, 'value': 'Hello from Quart!'}
+            yield json.dumps(data) + '\n'
+            await asyncio.sleep(1)  # Simulate some delay
+
+    return generate_data(), 200, {'Content-Type': 'application/x-ndjson'}
+-->
