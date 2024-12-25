@@ -14,3 +14,5 @@ https://stackoverflow.com/questions/69954196/quart-chat-server-example
 https://stackoverflow.com/questions/67090607/python-quart-websocket-send-data-between-two-clients
 
 https://python-team.pages.debian.net/packages/quart/websockets.html
+
+keywords: stream json with python quart to javascript
