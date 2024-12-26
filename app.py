@@ -59,9 +59,11 @@ async def ws_data():
     try:
         while True:
             tstamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S.%f")
-            mylist = (np.random.rand(3)*10).astype(float).tolist()
+            mylist = []
+            for n in range(10):
+                myitem = (np.random.rand(3)*2).astype(float).tolist()
+                mylist.append(myitem)
             data_str = render_html("refresh.html",mylist=mylist,tstamp=tstamp)
-            print(data_str)
             await websocket.send(data_str)
             await asyncio.sleep(1)
     except asyncio.CancelledError:

@@ -16,8 +16,9 @@ var layout_update = {
     };
 
 var z_data=[];
-z_data.push({{ mylist }});
-z_data.push({{ mylist }});
+{% for x in mylist %}
+z_data.push({{ x }});
+{% endfor %}
 
 var data_update = [{
     z: z_data,
