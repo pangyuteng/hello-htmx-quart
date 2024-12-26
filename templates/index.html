@@ -1,14 +1,14 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
 
     <style>
     </style>
@@ -16,22 +16,21 @@
 
 <body>
 
-    <div id="mydiv"></div>
 
 <div hx-ext="ws" ws-connect="/ws-data">
-111
-<div id="notifications"></div>
-hoho
 </div>
 
+<div id="mydiv"></div>
 
 <script>
 
-    var z_data=[ ]
+    var z_data = [];
+    z_data.push([1,2,3]);
+    z_data.push([1,2,3]);
     var data = [{
-            z: z_data,
-            type: 'surface'
-            }];
+        z: z_data,
+        type: 'surface'
+    }];
 
     var layout = {
     title: {
@@ -50,6 +49,8 @@ hoho
     Plotly.newPlot('mydiv', data, layout);
 
 </script>
+
+<div id="updatePlot"></div>
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+import os
 import argparse
 import asyncio
 import datetime
@@ -6,9 +7,11 @@ from quart import (
     Quart,
     websocket,
     render_template,
-    render_template_string,
     jsonify
 )
+
+from jinja2 import Environment, FileSystemLoader
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Quart(__name__,
     static_url_path='', 
@@ -19,7 +22,7 @@ app = Quart(__name__,
 @app.route("/ping")
 async def ping():
     return jsonify("pong")
-
+# 123
 @app.websocket('/ws-basic')
 async def ws_basic():
     try:
@@ -46,14 +49,20 @@ async def csv_data():
     random_data = np.random.rand(10).astype(float).tolist()
     return jsonify(random_data)
 
+template_folder = os.path.join(THIS_DIR,"templates")
+def render_html(html_file,**kwargs):
+    j2_env = Environment(loader=FileSystemLoader(template_folder))
+    return j2_env.get_template(html_file).render(**kwargs)
+
 @app.websocket('/ws-data')
 async def ws_data():
     try:
         while True:
             tstamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S.%f")
-            data_list = np.random.rand(10).astype(float).tolist()
-            block = await render_template("refresh.html",data_list=data_list)
-            await websocket.send(block.encode("utf-8"))
+            mylist = (np.random.rand(3)*10).astype(float).tolist()
+            data_str = render_html("refresh.html",mylist=mylist,tstamp=tstamp)
+            print(data_str)
+            await websocket.send(data_str)
             await asyncio.sleep(1)
     except asyncio.CancelledError:
         print('Client disconnected')
@@ -71,3 +80,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     app.run(debug=args.debug,host="0.0.0.0",port=args.port)
 
+"""
+
+"""
