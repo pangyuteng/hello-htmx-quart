@@ -20,13 +20,12 @@
 <div hx-ext="ws" ws-connect="/ws-data">
 </div>
 
-<div id="mydiv"></div>
+<div id="myDIV"></div>
 
 <script>
 
-    var z_data = [];
     var data = [{
-        z: z_data,
+        z: [],
         type: 'surface'
     }];
 
@@ -44,7 +43,7 @@
         t: 50,
     },
     };
-    Plotly.newPlot('mydiv', data, layout);
+    Plotly.newPlot(myDIV, data, layout);
 
 </script>
 
