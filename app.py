@@ -64,10 +64,8 @@ async def ws_data():
                 myitem = (np.random.rand(100)*2).astype(float).tolist()
                 mylist.append(myitem)
             data_str = render_html("refresh.html",mylist=mylist,tstamp=tstamp)
-            #data_str = render_html("refresh-restyle.html",mylist=mylist,tstamp=tstamp)
             await websocket.send(data_str)
-            #await asyncio.sleep(0.01)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
     except asyncio.CancelledError:
         print('Client disconnected')
         raise

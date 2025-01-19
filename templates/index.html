@@ -16,11 +16,10 @@
 
 <body>
 
+<div id="myDiv"></div>
 
 <div hx-ext="ws" ws-connect="/ws-data">
 </div>
-
-<div id="myDIV"></div>
 
 <script>
 
@@ -30,20 +29,22 @@
     }];
 
     var layout = {
-    title: {
-        text: 'test-surface'
-    },
-    autosize: false,
-    width: 512,
-    height: 512,
-    margin: {
-        l: 50,
-        r: 50,
-        b: 50,
-        t: 50,
-    },
+        title: {
+            text: 'hola'
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        autosize: false,
+        width: 512,
+        height: 512,
+        margin: {
+            l: 50,
+            r: 50,
+            b: 50,
+            t: 50,
+        },
     };
-    Plotly.newPlot(myDIV, data, layout);
+    Plotly.newPlot(myDiv, data, layout);
 
 </script>
 

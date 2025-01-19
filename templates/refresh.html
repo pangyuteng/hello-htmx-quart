@@ -1,9 +1,12 @@
 <div id="updatePlot" hx-swap-oob="true">
+
 <script>
-var layout_update = {
+var layoutUpdate = {
     title: {
         text: '{{tstamp}}'
     },
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
     autosize: false,
     width: 512,
     height: 512,
@@ -20,13 +23,14 @@ var z_data=[];
 z_data.push({{ x }});
 {% endfor %}
 
-var data_update = [{
+var dataUpdate = [{
     z: z_data,
     type: 'surface'
 }];
 
-Plotly.newPlot(myDIV, data_update, layout_update)
-//console.log(z_data);
+Plotly.react(myDiv, dataUpdate, myDiv.layout)
 
 </script>
+
+{{tstamp}}
 </div>

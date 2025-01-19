@@ -1,11 +1,13 @@
 # htmx-quart
 
 
-docker compose build
-
 docker run -it -u $(id -u):$(id -g) \
     -p 5000:5000 -v /mnt:/mnt -w $PWD \
     htmx-quart bash
+
+docker compose build
+
+docker compose up
 
 ## TODO
 
